@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Assist - Smart Cooking Companion</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Chef Assist">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <div class="logo-container">
+                        <i class="fas fa-utensils"></i>
+                        <span class="logo-text">
+                            <span class="logo-main">Chef</span>
+                            <span class="logo-accent">Assist</span>
+                        </span>
+                    </div>
+                    <div class="ai-indicator">
+                        <span class="ai-pulse"></span>
+                        <span class="ai-text">COOKING</span>
+                    </div>
+                </h1>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Screen -->
+            <div class="screen active" id="welcomeScreen">
+                <div class="welcome-content">
+                    <div class="welcome-icon">
+                        <i class="fas fa-chef-hat"></i>
+                    </div>
+                    <h2 class="cyber-title">
+                        <span class="title-line">Smart Cooking</span>
+                        <span class="title-line accent">Companion</span>
+                    </h2>
+                    <p class="cyber-subtitle">Your intelligent kitchen assistant with personalized recipe guidance, smart timers, and real-time cooking support</p>
+                    
+                    <div class="action-buttons">
+                        <button class="btn cyber-btn-primary" id="addRecipeBtn">
+                            <div class="btn-content">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Add Recipe</span>
+                            </div>
+                        </button>
+                        <button class="btn cyber-btn-secondary" id="voiceInputBtn">
+                            <div class="btn-content">
+                                <i class="fas fa-microphone"></i>
+                                <span>Voice Input</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recipe Input Screen -->
+            <div class="screen" id="recipeInputScreen">
+                <div class="screen-header">
+                    <button class="back-btn" id="backToWelcome">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Add Recipe</h2>
+                </div>
+                
+                <div class="input-section">
+                    <div class="input-tabs">
+                        <button class="tab-btn active" data-tab="text">Text</button>
+                        <button class="tab-btn" data-tab="voice">Voice</button>
+                        <button class="tab-btn" data-tab="url">URL</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="textTab">
+                        <textarea 
+                            id="recipeTextInput" 
+                            placeholder="Paste your recipe here or type it out..."
+                            rows="10"
+                        ></textarea>
+                    </div>
+                    
+                    <div class="tab-content" id="voiceTab">
+                        <div class="voice-input-area">
+                            <button class="voice-record-btn" id="voiceRecordBtn">
+                                <i class="fas fa-microphone"></i>
+                                <span>Tap to speak your recipe</span>
+                            </button>
+                            <div class="voice-status" id="voiceStatus"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="urlTab">
+                        <input 
+                            type="url" 
+                            id="recipeUrlInput" 
+                            placeholder="Enter recipe URL..."
+                        >
+                        <button class="btn btn-secondary" id="fetchRecipeBtn">
+                            <i class="fas fa-download"></i>
+                            Fetch Recipe
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="preferences-section">
+                    <h3>Cooking Preferences</h3>
+                    <div class="preference-grid">
+                        <div class="preference-item">
+                            <label for="skillLevel">Skill Level</label>
+                            <select id="skillLevel">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate" selected>Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="preference-item">
+                            <label for="servings">Servings</label>
+                            <input type="number" id="servings" value="4" min="1" max="20">
+                        </div>
+                    </div>
+                    
+                    <div class="dietary-restrictions">
+                        <label>Dietary Restrictions</label>
+                        <div class="restriction-tags">
+                            <button class="tag-btn" data-restriction="vegetarian">Vegetarian</button>
+                            <button class="tag-btn" data-restriction="vegan">Vegan</button>
+                            <button class="tag-btn" data-restriction="gluten-free">Gluten-Free</button>
+                            <button class="tag-btn" data-restriction="dairy-free">Dairy-Free</button>
+                            <button class="tag-btn" data-restriction="nut-free">Nut-Free</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-full" id="processRecipeBtn">
+                    <i class="fas fa-magic"></i>
+                    Process Recipe
+                </button>
+            </div>
+
+            <!-- Cooking Screen -->
+            <div class="screen" id="cookingScreen">
+                <div class="cooking-header">
+                    <button class="back-btn" id="backToInput">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="recipe-info">
+                        <h2 id="recipeTitle">Recipe Name</h2>
+                        <div class="recipe-meta">
+                            <span id="totalTime"><i class="fas fa-clock"></i> 45 min</span>
+                            <span id="servingCount"><i class="fas fa-users"></i> 4 servings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="currentStep">Step 1 of 8</span>
+                        <span id="timeRemaining">~35 min remaining</span>
+                    </div>
+                </div>
+
+                <!-- Active Timers -->
+                <div class="timers-section" id="timersSection">
+                    <h3>Active Timers</h3>
+                    <div class="timers-container" id="timersContainer">
+                        <!-- Timers will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Current Step -->
+                <div class="current-step-section">
+                    <div class="step-content">
+                        <div class="step-number" id="stepNumber">1</div>
+                        <div class="step-details">
+                            <h3 id="stepTitle">Prepare ingredients</h3>
+                            <p id="stepInstructions">Gather all ingredients and measure them according to the recipe.</p>
+                            <div class="step-tips" id="stepTips">
+                                <!-- Tips will be added dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-actions">
+                        <button class="btn btn-secondary" id="prevStepBtn">
+                            <i class="fas fa-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button class="btn btn-primary" id="nextStepBtn">
+                            Next Step
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Voice Controls -->
+                <div class="voice-controls">
+                    <button class="voice-control-btn" id="voiceControlBtn">
+                        <i class="fas fa-microphone"></i>
+                        <span>Voice Commands</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Screen -->
+            <div class="screen" id="settingsScreen">
+                <div class="screen-header">
+                    <button class="back-btn" id="backFromSettings">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="settings-content">
+                    <div class="setting-group">
+                        <h3>Voice Settings</h3>
+                        <div class="setting-item">
+                            <label for="voiceEnabled">Enable Voice Control</label>
+                            <input type="checkbox" id="voiceEnabled" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label for="voiceLanguage">Voice Language</label>
+                            <select id="voiceLanguage">
+                                <option value="en-US">English (US)</option>
+                                <option value="en-GB">English (UK)</option>
+                                <option value="es-ES">Spanish</option>
+                                <option value="fr-FR">French</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h3>Timer Settings</h3>
+                        <div class="setting-item">
+                            <label for="timerSound">Timer Sound</label>
+                            <select id="timerSound">
+                                <option value="bell">Bell</option>
+                                <option value="chime">Chime</option>
+                                <option value="beep">Beep</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="timerVolume">Timer Volume</label>
+                            <input type="range" id="timerVolume" min="0" max="100" value="80">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h3>Display Settings</h3>
+                        <div class="setting-item">
+                            <label for="keepScreenOn">Keep Screen On</label>
+                            <input type="checkbox" id="keepScreenOn" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label for="darkMode">Dark Mode</label>
+                            <input type="checkbox" id="darkMode">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p id="loadingText">Processing your recipe...</p>
+            </div>
+        </div>
+
+        <!-- Voice Command Modal -->
+        <div class="modal" id="voiceCommandModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Voice Commands</h3>
+                    <button class="close-btn" id="closeVoiceModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="voice-commands-list">
+                        <div class="command-item">
+                            <strong>"Next step"</strong> - Move to next cooking step
+                        </div>
+                        <div class="command-item">
+                            <strong>"Previous step"</strong> - Go back to previous step
+                        </div>
+                        <div class="command-item">
+                            <strong>"Set timer for [X] minutes"</strong> - Start a timer
+                        </div>
+                        <div class="command-item">
+                            <strong>"Repeat instructions"</strong> - Read current step again
+                        </div>
+                        <div class="command-item">
+                            <strong>"How much time left?"</strong> - Check remaining cooking time
+                        </div>
+                        <div class="command-item">
+                            <strong>"What's next?"</strong> - Preview next step
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

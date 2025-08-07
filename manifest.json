@@ -1,0 +1,65 @@
+{
+  "name": "Chef Assist - Smart Cooking Companion",
+  "short_name": "Chef Assist",
+  "description": "Your intelligent kitchen assistant with personalized recipe guidance, smart timers, and real-time cooking support",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fef9e7",
+  "theme_color": "#ff6b35",
+  "orientation": "portrait-primary",
+  "categories": ["food", "lifestyle", "utilities"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff6b35'/%3E%3Cstop offset='100%25' stop-color='%23e74c3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' rx='24' fill='url(%23bg)'/%3E%3Cpath d='M96 48c8.8 0 16 7.2 16 16v8h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V88c0-8.8 7.2-16 16-16h32v-8c0-8.8 7.2-16 16-16zm0 16v8h0v-8zm32 88V88H64v64h64zm-48-40h16v16H80v-16zm24 0h16v16h-16v-16zm24 0h16v16h-16v-16z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff6b35'/%3E%3Cstop offset='100%25' stop-color='%23e74c3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='64' fill='url(%23bg)'/%3E%3Cpath d='M256 128c23.5 0 42.7 19.2 42.7 42.7v21.3h85.3c23.5 0 42.7 19.2 42.7 42.7v170.6c0 23.5-19.2 42.7-42.7 42.7H128c-23.5 0-42.7-19.2-42.7-42.7V234.7c0-23.5 19.2-42.7 42.7-42.7h85.3v-21.3c0-23.5 19.2-42.7 42.7-42.7zm0 42.7v21.3h0v-21.3zm85.3 234.6V234.7H170.7v170.6h170.6zm-128-106.6h42.7v42.7h-42.7v-42.7zm64 0h42.7v42.7h-42.7v-42.7zm64 0h42.7v42.7h-42.7v-42.7z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='568' viewBox='0 0 320 568'%3E%3Crect width='320' height='568' fill='%23f8f9fa'/%3E%3Crect width='320' height='80' fill='%23ff6b35'/%3E%3Ctext x='160' y='50' fill='white' font-family='Inter' font-size='20' font-weight='700' text-anchor='middle'%3ESoul Curry%3C/text%3E%3Ccircle cx='160' cy='200' r='40' fill='%23ff6b35' opacity='0.2'/%3E%3Ctext x='160' y='280' fill='%232c3e50' font-family='Inter' font-size='24' font-weight='600' text-anchor='middle'%3EIntelligent Cooking%3C/text%3E%3Ctext x='160' y='310' fill='%232c3e50' font-family='Inter' font-size='24' font-weight='600' text-anchor='middle'%3ECompanion%3C/text%3E%3C/svg%3E",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "features": [
+    "Cross Platform",
+    "fast",
+    "simple"
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Recipe",
+      "short_name": "Add Recipe",
+      "description": "Quickly add a new recipe",
+      "url": "/?action=add-recipe",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='12' fill='%23ff6b35'/%3E%3Cpath d='M48 24c2.2 0 4 1.8 4 4v16h16c2.2 0 4 1.8 4 4s-1.8 4-4 4H52v16c0 2.2-1.8 4-4 4s-4-1.8-4-4V52H28c-2.2 0-4-1.8-4-4s1.8-4 4-4h16V28c0-2.2 1.8-4 4-4z' fill='white'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Voice Input",
+      "short_name": "Voice",
+      "description": "Add recipe using voice input",
+      "url": "/?action=voice-input",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='12' fill='%234a90e2'/%3E%3Cpath d='M48 24c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8s-8-3.6-8-8V32c0-4.4 3.6-8 8-8zm16 20c2.2 0 4 1.8 4 4 0 11-9 20-20 20s-20-9-20-20c0-2.2 1.8-4 4-4s4 1.8 4 4c0 6.6 5.4 12 12 12s12-5.4 12-12c0-2.2 1.8-4 4-4zm-16 28v8h8c2.2 0 4 1.8 4 4s-1.8 4-4 4h-8-8c-2.2 0-4-1.8-4-4s1.8-4 4-4h8v-8z' fill='white'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1244 @@
+/* Chef Assist - Cooking App Interface */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cooking-Inspired Color Palette */
+    --primary-orange: #ff6b35;
+    --warm-red: #e74c3c;
+    --golden-yellow: #f39c12;
+    --fresh-green: #27ae60;
+    --cream-white: #fef9e7;
+    --warm-brown: #8b4513;
+    --light-cream: #faf6f0;
+    --soft-beige: #f5f1eb;
+    --dark-brown: #3e2723;
+    --medium-brown: #5d4037;
+    
+    /* Neutral Colors */
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --text-light: #95a5a6;
+    --background: #ffffff;
+    --surface: #faf6f0;
+    --border: #e8ddd4;
+    --shadow: rgba(139, 69, 19, 0.1);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Playfair Display', serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(139, 69, 19, 0.1);
+    --shadow-md: 0 4px 12px rgba(139, 69, 19, 0.15);
+    --shadow-lg: 0 8px 24px rgba(139, 69, 19, 0.2);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease-out;
+    --transition-normal: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
+}
+
+/* Update fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--cream-white) 0%, var(--light-cream) 100%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Container */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    background: var(--background);
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-red) 100%);
+    color: white;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.app-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.logo-container i {
+    font-size: 2rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-display);
+    line-height: 1.2;
+}
+
+.logo-main {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.logo-accent {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.ai-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.ai-pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--fresh-green);
+    border-radius: 50%;
+    animation: cookingPulse 2s ease-in-out infinite;
+}
+
+@keyframes cookingPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.settings-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(10px);
+}
+
+.settings-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    position: relative;
+    background: var(--surface);
+}
+
+/* Screen Management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: all var(--transition-normal);
+    overflow-y: auto;
+    background: var(--surface);
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Welcome Screen */
+.welcome-content {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: var(--spacing-2xl);
+}
+
+.welcome-icon {
+    font-size: 5rem;
+    color: var(--primary-orange);
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--primary-orange), var(--golden-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cyber-title {
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-lg);
+}
+
+.title-line {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.title-line.accent {
+    font-size: 1.8rem;
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+.cyber-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2xl);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* Cooking-themed Buttons */
+.cyber-btn-primary, .cyber-btn-secondary {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 1.1rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    border: none;
+}
+
+.cyber-btn-primary {
+    background: linear-gradient(135deg, var(--primary-orange), var(--warm-red));
+    color: white;
+}
+
+.cyber-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.cyber-btn-secondary {
+    background: var(--background);
+    color: var(--text-primary);
+    border: 2px solid var(--border);
+}
+
+.cyber-btn-secondary:hover {
+    background: var(--soft-beige);
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.btn-content i {
+    font-size: 1.3rem;
+}
+
+/* Screen Headers */
+.screen-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border);
+}
+
+.back-btn {
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.back-btn:hover {
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+    background: var(--soft-beige);
+}
+
+.screen-header h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Input Sections */
+.input-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.input-tabs {
+    display: flex;
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-weight: 500;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--primary-orange), var(--warm-red));
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-btn:not(.active):hover {
+    color: var(--primary-orange);
+    background: var(--soft-beige);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Elements */
+#recipeTextInput {
+    width: 100%;
+    padding: var(--spacing-lg);
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 200px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+#recipeTextInput:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+#recipeTextInput::placeholder {
+    color: var(--text-light);
+}
+
+/* Voice Input */
+.voice-input-area {
+    text-align: center;
+    padding: var(--spacing-2xl);
+}
+
+.voice-record-btn {
+    background: linear-gradient(135deg, var(--primary-orange), var(--golden-yellow));
+    border: none;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    margin: 0 auto var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+    color: white;
+}
+
+.voice-record-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+}
+
+.voice-record-btn.recording {
+    background: linear-gradient(135deg, var(--warm-red), var(--primary-orange));
+    animation: recordingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes recordingPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.voice-record-btn i {
+    font-size: 2rem;
+}
+
+.voice-record-btn span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.voice-status {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* URL Input */
+#urlTab {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+#recipeUrlInput {
+    flex: 1;
+    padding: var(--spacing-md);
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition-fast);
+}
+
+#recipeUrlInput:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+#fetchRecipeBtn {
+    background: var(--background);
+    border: 2px solid var(--primary-orange);
+    color: var(--primary-orange);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-weight: 600;
+}
+
+#fetchRecipeBtn:hover {
+    background: var(--primary-orange);
+    color: white;
+}
+
+/* Preferences Section */
+.preferences-section {
+    background: var(--background);
+    border: 2px solid var(--border);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.preferences-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.preference-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.preference-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.preference-item label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.preference-item select,
+.preference-item input {
+    padding: var(--spacing-md);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    background: var(--background);
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+}
+
+.preference-item select:focus,
+.preference-item input:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.dietary-restrictions label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.restriction-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.tag-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.tag-btn.active {
+    background: var(--primary-orange);
+    color: white;
+    border-color: var(--primary-orange);
+}
+
+.tag-btn:not(.active):hover {
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+    background: var(--soft-beige);
+}
+
+/* Process Recipe Button */
+.btn-full {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-orange), var(--warm-red));
+    border: none;
+    color: white;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-lg);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.btn-full:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255, 107, 53, 0.3);
+}
+
+.btn-full:active {
+    transform: translateY(-1px);
+}
+
+/* Cooking Screen Elements */
+.cooking-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.recipe-info {
+    flex: 1;
+}
+
+.recipe-info h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.recipe-meta {
+    display: flex;
+    gap: var(--spacing-lg);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.recipe-meta i {
+    color: var(--primary-orange);
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-bottom: var(--spacing-xl);
+    background: var(--background);
+    border: 2px solid var(--border);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--soft-beige);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-orange), var(--golden-yellow));
+    border-radius: var(--radius-lg);
+    transition: width var(--transition-slow);
+    width: 0%;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: progressShimmer 2s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Timers Section */
+.timers-section {
+    margin-bottom: var(--spacing-xl);
+    background: var(--background);
+    border: 2px solid var(--border);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.timers-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.timers-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.timer-item {
+    background: var(--soft-beige);
+    border: 2px solid var(--border);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid var(--primary-orange);
+    box-shadow: var(--shadow-sm);
+}
+
+.timer-info {
+    flex: 1;
+}
+
+.timer-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timer-time {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    font-family: 'Courier New', monospace;
+}
+
+.timer-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.timer-btn {
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.timer-btn:hover {
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.timer-btn.danger:hover {
+    border-color: var(--warm-red);
+    color: var(--warm-red);
+}
+
+/* Current Step Section */
+.current-step-section {
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.step-content {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.step-number {
+    background: linear-gradient(135deg, var(--primary-orange), var(--warm-red));
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-md);
+}
+
+.step-details {
+    flex: 1;
+}
+
+.step-details h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.step-details p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.05rem;
+}
+
+.step-tips {
+    background: var(--soft-beige);
+    border: 2px solid var(--border);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border-left: 6px solid var(--golden-yellow);
+}
+
+.step-tip {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.step-tip:last-child {
+    margin-bottom: 0;
+}
+
+.step-tip i {
+    color: var(--golden-yellow);
+    margin-top: 2px;
+}
+
+.step-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.step-actions .btn {
+    flex: 1;
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-weight: 600;
+}
+
+.step-actions .btn:hover {
+    border-color: var(--primary-orange);
+    background: var(--soft-beige);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Voice Controls */
+.voice-controls {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    z-index: 50;
+}
+
+.voice-control-btn {
+    background: linear-gradient(135deg, var(--primary-orange), var(--golden-yellow));
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+    color: white;
+}
+
+.voice-control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+}
+
+.voice-control-btn i {
+    font-size: 1.5rem;
+}
+
+.voice-control-btn span {
+    font-size: 0.7rem;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+/* Settings Screen */
+.settings-content {
+    max-width: 600px;
+}
+
+.setting-group {
+    margin-bottom: var(--spacing-2xl);
+    background: var(--background);
+    border: 2px solid var(--border);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.setting-group h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.setting-item input,
+.setting-item select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--background);
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-orange);
+}
+
+.setting-item input[type="range"] {
+    width: 120px;
+    accent-color: var(--primary-orange);
+}
+
+.setting-item input:focus,
+.setting-item select:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--border);
+    border-top: 4px solid var(--primary-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--spacing-lg);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-content p {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-xl);
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.9);
+    transition: var(--transition-normal);
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 2px solid var(--border);
+    background: var(--soft-beige);
+}
+
+.modal-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.close-btn {
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-btn:hover {
+    border-color: var(--warm-red);
+    color: var(--warm-red);
+    background: var(--soft-beige);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.voice-commands-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.command-item {
+    padding: var(--spacing-md);
+    background: var(--soft-beige);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    border-left: 6px solid var(--primary-orange);
+}
+
+.command-item strong {
+    color: var(--primary-orange);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .app-container {
+        max-width: 768px;
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+    }
+    
+    .preference-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .step-actions {
+        justify-content: flex-end;
+    }
+    
+    .step-actions .btn {
+        flex: none;
+        min-width: 140px;
+    }
+    
+    .voice-controls {
+        bottom: var(--spacing-2xl);
+        right: var(--spacing-2xl);
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-container {
+        max-width: 1024px;
+    }
+    
+    .main-content {
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .screen {
+        padding: var(--spacing-2xl);
+    }
+    
+    .modal-content {
+        max-width: 600px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Styles */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --border: var(--text-primary);
+        --text-secondary: var(--text-primary);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .voice-controls,
+    .loading-overlay,
+    .modal {
+        display: none !important;
+    }
+    
+    .app-container {
+        background: white;
+        color: black;
+    }
+}
