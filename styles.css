@@ -11,12 +11,13 @@
 }
 
 :root {
-    --primary-blue: #007aff;
+    --primary-blue: #007BFF;
+    --primary-gradient: linear-gradient(135deg, #007BFF, #0056b3);
     --light-bg: #f8f9fa;
     --surface-bg: #ffffff;
     --text-primary: #212529;
     --text-secondary: #6c757d;
-    --border-color: #dee2e6;
+    --border-color: #e9ecef;
     
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -30,7 +31,7 @@
     --radius-lg: 12px;
 
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
 
     --transition: 0.3s ease;
 }
@@ -138,8 +139,9 @@ body {
 }
 
 .cyber-btn-primary {
-    background-color: var(--primary-blue);
+    background-image: var(--primary-gradient);
     color: white;
+    border: none;
 }
 
 .cyber-btn-primary:hover {
@@ -154,6 +156,23 @@ body {
 
 .cyber-btn-secondary:hover {
     background-color: var(--light-bg);
+}
+
+.voice-record-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-image: var(--primary-gradient);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    font-family: var(--font-display);
+    box-shadow: var(--shadow-md);
 }
 
 /* Forms */
@@ -201,6 +220,14 @@ textarea:focus, input:focus, select:focus {
     box-shadow: var(--shadow-sm);
 }
 
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 /* Cards / Panels */
 .preferences-section, .timers-section, .current-step-section, .setting-group {
     background: var(--surface-bg);
@@ -208,7 +235,7 @@ textarea:focus, input:focus, select:focus {
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
 }
 
 /* Loading and Modals */
