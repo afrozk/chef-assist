@@ -45,9 +45,7 @@ class ChefAssistApp {
             keepScreenOn: true,
             darkMode: true, // Default to dark mode for cyberpunk theme
             skillLevel: 'intermediate',
-            dietaryRestrictions: [],
-            particleEffects: true,
-            cyberEffects: true
+            dietaryRestrictions: []
         };
 
         const saved = localStorage.getItem('chefAssistSettings');
